@@ -6,7 +6,7 @@ The two inputs take two numbers and outputs the fibonacci sequence between these
 Created with create-react-app and express for api.
 ## To Run Locally
 ```
-git clone https://github.com/moitorrijos/fibonacci.git
+git clone https://github.com/moitorrijos/fibonacci
 cd fibonacci
 npm i
 
