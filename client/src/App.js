@@ -1,17 +1,33 @@
 import './App.css';
 import { useState } from "react"
-import axios from "axios"
 
 function App() {
   const [firstNumber, setFirstNumber] = useState(0);
   const [secondNumber, setSecondNumber] = useState(0);
   const [result, setResult] = useState([]);
-  const submitForm = (event) => {
+  const submitForm = async (event) => {
     event.preventDefault();
-    axios.post('http://localhost:3333/api', {
-      firstNumber,
-      secondNumber
-    }).then(response => setResult(response.data.data))
+    try {
+      const rawResponse = await fetch('http://localhost:3333/api', {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          firstNumber,
+          secondNumber
+        })
+      })
+      const response = await rawResponse.json();
+      if (response.message !== 'success!') {
+        throw new Error('Error in the response')
+      }
+      setResult(response.data)
+    } catch (error) {
+      throw new Error(error)
+    }
+
   }
   return (
     <div className="App">
@@ -28,7 +44,7 @@ function App() {
           </label>
           <button type="submit">Submit</button>
         </form>
-        {firstNumber === 0 && secondNumber === 0 ? <p>Please enter starting and ending numbers</p> : <p>{result.map((number, index, row) => index + 1 === row.length ? <span>{number}</span> : <span>{number},{" "}</span>)}</p>}
+        {firstNumber === 0 && secondNumber === 0 ? <p>Please enter starting and ending numbers</p> : <p>{result.join(', ')}</p>}
       </header>
     </div>
   );

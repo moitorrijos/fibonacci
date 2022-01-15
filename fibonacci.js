@@ -9,7 +9,7 @@ function fibonacciSequence(number) {
 function fibonacci(firstNumber, secondNumber) {
   let result = [];
   let initial = 0;
-  while ((firstNumber >= 0) && (secondNumber > firstNumber)) {
+  while ((firstNumber >= 0) && (secondNumber >= firstNumber)) {
     let fibonacciNumber = fibonacciSequence(initial);
     if (fibonacciNumber > secondNumber) break;
     if (fibonacciNumber >= firstNumber) {

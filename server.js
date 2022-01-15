@@ -7,15 +7,15 @@ const bodyParser = require('body-parser')
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json())
-app.use(cors())
 
 var corsOptions = {
   origin: 'http://localhost:3000/',
   optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
 }
 
+app.use(cors(corsOptions))
+
 app.post('/api', (req, res) => {
-  console.log(req.body)
   const { firstNumber, secondNumber } = req.body
   const result = fibonacci(+firstNumber, +secondNumber)
   return res.json({ message: 'success!', data: result })

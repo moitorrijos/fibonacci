@@ -1,8 +1,14 @@
 import { render, screen } from '@testing-library/react';
 import App from './App';
 
-test('renders learn react link', () => {
+test('Checks if starting text is in the document', () => {
   render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+  const startingNumber = screen.getByText(/Starting Number/);
+  expect(startingNumber).toBeInTheDocument();
+});
+
+test('Checks if ending text is in the document', () => {
+  render(<App />);
+  const endingNumber = screen.getByText(/Ending Number/);
+  expect(endingNumber).toBeInTheDocument();
 });
